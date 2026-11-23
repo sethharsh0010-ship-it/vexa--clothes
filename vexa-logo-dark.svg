@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 90" width="460" height="90">
+  <defs>
+    <linearGradient id="vexaGoldGradLockup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8D6A7"/>
+      <stop offset="35%" stop-color="#C6A15B"/>
+      <stop offset="70%" stop-color="#A8823C"/>
+      <stop offset="100%" stop-color="#F2E6C9"/>
+    </linearGradient>
+    <linearGradient id="vexaGoldShineLockup" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8E6924"/>
+      <stop offset="50%" stop-color="#D8C18B"/>
+      <stop offset="100%" stop-color="#FAF1DE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Geometric Monogram -->
+  <g transform="translate(10, 10) scale(0.7)">
+    <polygon points="50,92 12,24 24,14 50,68" fill="url(#vexaGoldGradLockup)" />
+    <polygon points="50,92 88,24 76,14 50,68" fill="url(#vexaGoldShineLockup)" />
+    <polygon points="50,68 24,14 36,14 50,46" fill="url(#vexaGoldShineLockup)" opacity="0.95" />
+    <polygon points="50,68 76,14 64,14 50,46" fill="url(#vexaGoldGradLockup)" opacity="0.9" />
+    <polygon points="50,8 59,24 50,40 41,24" fill="url(#vexaGoldGradLockup)" stroke="#FAF1DE" stroke-width="0.75" />
+    <line x1="28" y1="36" x2="72" y2="36" stroke="url(#vexaGoldShineLockup)" stroke-width="1.5" stroke-linecap="round" opacity="0.8" />
+  </g>
+
+  <!-- Vertical Divider Accent -->
+  <line x1="88" y1="20" x2="88" y2="70" stroke="#C6A15B" stroke-width="1" opacity="0.4" />
+
+  <!-- Typography: V E X A -->
+  <text x="105" y="52" font-family="'Cinzel', 'Playfair Display', 'Bodoni MT', 'Didot', serif" font-size="38" font-weight="700" letter-spacing="12" fill="#F8F6F1">
+    VEXA
+  </text>
+  
+  <!-- Subtle Gold Highlight Dot on VEXA -->
+  <circle cx="340" cy="46" r="3" fill="url(#vexaGoldGradLockup)" />
+
+  <!-- Tagline: CLOTHING COLLECTIVE | JAIPUR -->
+  <text x="106" y="70" font-family="'Montserrat', 'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="500" letter-spacing="5" fill="#C6A15B">
+    CLOTHING COLLECTIVE <tspan fill="#D8C18B">|</tspan> JAIPUR
+  </text>
+</svg>
