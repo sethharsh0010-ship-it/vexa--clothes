@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 1. Homepage -->
+  <url>
+    <loc>https://vexa.luxury/#home</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- 2. Men's Clothing -->
+  <url>
+    <loc>https://vexa.luxury/#shop/men</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- 3. Women's Clothing -->
+  <url>
+    <loc>https://vexa.luxury/#shop/women</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- 4. Footwear -->
+  <url>
+    <loc>https://vexa.luxury/#shop/footwear</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- 5. Sneakers -->
+  <url>
+    <loc>https://vexa.luxury/#shop/sneakers</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- 6. New Arrivals -->
+  <url>
+    <loc>https://vexa.luxury/#shop/new-arrivals</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- 7. Best Sellers -->
+  <url>
+    <loc>https://vexa.luxury/#shop/best-sellers</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- 8. Sale Collection -->
+  <url>
+    <loc>https://vexa.luxury/#shop/sale</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 9. Product Details -->
+  <url>
+    <loc>https://vexa.luxury/#product</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 10. Search Results -->
+  <url>
+    <loc>https://vexa.luxury/#search</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 11. Wishlist -->
+  <url>
+    <loc>https://vexa.luxury/#wishlist</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- 12. Shopping Cart -->
+  <url>
+    <loc>https://vexa.luxury/#cart</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- 13. Checkout -->
+  <url>
+    <loc>https://vexa.luxury/#checkout</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 14. Customer Login -->
+  <url>
+    <loc>https://vexa.luxury/#login</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 15. Customer Registration -->
+  <url>
+    <loc>https://vexa.luxury/#register</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 16. My Account -->
+  <url>
+    <loc>https://vexa.luxury/#account</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 17. My Orders -->
+  <url>
+    <loc>https://vexa.luxury/#account/orders</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 18. Order Tracking -->
+  <url>
+    <loc>https://vexa.luxury/#tracking</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 19. Contact Us -->
+  <url>
+    <loc>https://vexa.luxury/#contact</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 20. About VEXA -->
+  <url>
+    <loc>https://vexa.luxury/#about</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 21. Privacy Policy -->
+  <url>
+    <loc>https://vexa.luxury/#privacy-policy</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- 22. Return and Refund Policy -->
+  <url>
+    <loc>https://vexa.luxury/#return-policy</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- 23. Shipping Policy -->
+  <url>
+    <loc>https://vexa.luxury/#shipping-policy</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- 24. Terms and Conditions -->
+  <url>
+    <loc>https://vexa.luxury/#terms</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- 25. FAQ -->
+  <url>
+    <loc>https://vexa.luxury/#faqs</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

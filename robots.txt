@@ -1,0 +1,12 @@
+# VEXA – Ultra-Premium Fashion & Footwear Collective
+# https://vexa.luxury | Founder & Creative Director: Harsh (Jaipur, India)
+# Contact: sethharsh0010@gmail.com
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/admin/
+Disallow: /api/auth/
+
+# Master XML Sitemap
+Sitemap: https://vexa.luxury/sitemap.xml

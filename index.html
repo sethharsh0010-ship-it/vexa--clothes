@@ -1,0 +1,992 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VEXA – Ultra-Premium Fashion & Footwear Collective</title>
+  
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="VEXA – Ultra-premium luxury fashion, tailored clothing, and artisanal footwear. Minimalist architectural silhouettes, single-origin textiles, and refined international craftsmanship." />
+  <meta name="keywords" content="VEXA, luxury fashion, Indian designer wear, minimal luxury, Bandhgala, Giza cotton, Italian calfskin sneakers, luxury footwear" />
+  <meta name="author" content="VEXA Atelier" />
+  <meta name="theme-color" content="#FFFFFF" />
+
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VEXA – Ultra-Premium Fashion & Footwear Collective" />
+  <meta property="og:description" content="Minimalist architectural luxury fashion and handcrafted footwear." />
+  <meta property="og:image" content="assets/brand/vexa-logo-light.svg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="assets/brand/favicon.png" />
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Firebase Authentication SDK (Production Real SMS Phone Sign-In) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <!-- Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- Structured Data JSON-LD (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "VEXA",
+    "description": "Ultra-Premium Fashion and Footwear E-Commerce Collective",
+    "url": "https://vexa.luxury",
+    "logo": "https://vexa.luxury/assets/brand/vexa-logo-light.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Atelier VEXA, C-Scheme, Ashok Nagar",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "postalCode": "302001",
+      "addressCountry": "IN"
+    },
+    "email": "sethharsh0010@gmail.com",
+    "priceRange": "₹₹₹"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ==================== AMBIENT LIQUID CANVAS & CURSOR ==================== -->
+  <canvas id="ambientLiquidCanvas" class="ambient-liquid-canvas"></canvas>
+  <div class="vexa-liquid-cursor-glow" id="liquidCursorGlow"></div>
+  <div class="vexa-liquid-cursor" id="liquidCursor"></div>
+
+  <!-- ==================== ANNOUNCEMENT TOP BAR ==================== -->
+  <aside class="announcement-bar">
+    <div style="font-size: 0.68rem; letter-spacing: 0.16em;">
+      ATELIER JAIPUR • COMPLIMENTARY EXPRESS DELIVERY OVER ₹1,999
+    </div>
+    <div class="announcement-text" id="announcementText">
+      SPRING / SUMMER '26 COUTURE DROP IS LIVE • USE CODE 'JAIPURGOLD' FOR ₹500 OFF
+    </div>
+    <div style="font-size: 0.68rem;">
+      <a href="mailto:sethharsh0010@gmail.com" style="color: var(--color-text-secondary); text-decoration: none;">sethharsh0010@gmail.com</a>
+    </div>
+  </aside>
+
+  <!-- ==================== STICKY LUXURY NAVIGATION HEADER ==================== -->
+  <header class="vexa-header">
+    <div class="header-container">
+      <!-- Luxury Brand Logo -->
+      <a href="#home" class="vexa-brand-link">
+        <img src="assets/brand/vexa-logo-light.svg" alt="VEXA Clothing Collective" class="vexa-brand-logo-img" />
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav>
+        <ul class="nav-menu" id="mainNavCategories">
+          <!-- Populated by app.js: Men, Women, Footwear, Sneakers, New Arrivals, Best Sellers, Sale -->
+        </ul>
+      </nav>
+
+      <!-- Action Icons & Search -->
+      <div class="header-actions">
+        <!-- Live Search -->
+        <div class="search-bar-trigger">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-text-secondary);">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="headerSearchInput" placeholder="Search silk, linen, sneakers..." />
+        </div>
+
+        <!-- Wishlist Icon -->
+        <button class="icon-action-btn" onclick="VEXA.navigateTo('#wishlist')" title="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="action-badge wishlist-badge-count" style="display: none;">0</span>
+        </button>
+
+        <!-- Account / Mobile OTP Register Icon -->
+        <button class="icon-action-btn" id="headerUserBtn" onclick="VEXA.handleUserIconClick()" title="Sign In / Register with Mobile OTP">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- Shopping Cart Icon -->
+        <button class="icon-action-btn" onclick="VEXA.openCartDrawer()" title="Shopping Bag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="action-badge cart-badge-count" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN APPLICATION VIEWS ==================== -->
+  <main id="mainContent">
+
+    <!-- VIEW 1: HOME PAGE -->
+    <div id="viewHome" class="view-container">
+      <!-- Fullscreen Hero Carousel -->
+      <section class="hero-slider" id="heroSliderContainer">
+        <!-- Rendered by app.js with high-fashion slides -->
+      </section>
+
+      <!-- Department Spotlight: Shop Men, Shop Women, Shop Footwear -->
+      <section class="section-container" style="background: var(--color-white);">
+        <div class="section-header">
+          <span class="section-subtitle">Curated Departments</span>
+          <h2 class="section-title">THE ARCHITECTURAL COLLECTIONS</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="category-grid" id="categoryGridContainer">
+          <!-- Rendered by app.js: Men, Women, Footwear, Sneakers -->
+        </div>
+      </section>
+
+      <!-- New Season Arrivals Shelf -->
+      <section class="section-container" style="background: var(--color-ivory); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="section-header">
+          <span class="section-subtitle">Fresh from the Jaipur Atelier</span>
+          <h2 class="section-title">NEW SEASON ARRIVALS</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid" id="newArrivalsGrid">
+          <!-- Rendered by app.js with product cards -->
+        </div>
+        <div style="text-align: center; margin-top: 48px;">
+          <a href="#shop/new-arrivals" class="btn btn-outline-gold">EXPLORE ALL NEW ARRIVALS</a>
+        </div>
+      </section>
+
+      <!-- Trending Products & Exclusive Drops Shelf -->
+      <section class="section-container" style="background: var(--color-white);">
+        <div class="section-header">
+          <span class="section-subtitle">Most Coveted Pieces</span>
+          <h2 class="section-title">TRENDING NOW & EXCLUSIVE DROPS</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid" id="trendingGrid">
+          <!-- Rendered by app.js -->
+        </div>
+      </section>
+
+      <!-- Seasonal Offers & Promotional Banner -->
+      <section style="background: var(--champagne-gradient); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 70px 24px;">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+          <div style="max-width: 600px;">
+            <span style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-gold-dark); font-weight: 700;">SEASONAL INVITATION</span>
+            <h2 style="font-size: 2.2rem; margin: 8px 0 12px 0;">COMPLIMENTARY ₹500 WELCOME ATELIER VOUCHER</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.92rem; line-height: 1.6;">
+              Experience the pinnacle of Indian artisanal tailoring and Italian calfskin footwear. Apply code <strong style="color: var(--color-text-primary); letter-spacing: 0.1em; background: var(--color-white); padding: 2px 8px; border: 1px dashed var(--color-gold-champagne); border-radius: 2px;">JAIPURGOLD</strong> at checkout on your first order.
+            </p>
+          </div>
+          <div>
+            <a href="#shop" class="btn btn-dark">CLAIM VOUCHER & SHOP</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Atelier Craftsmanship & Brand Story -->
+      <section style="position: relative; padding: 100px 28px; background: var(--color-pearl); border-bottom: 1px solid var(--color-border);">
+        <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+          <div>
+            <span class="section-subtitle">Heritage & Vision</span>
+            <h2 style="font-size: 2.5rem; line-height: 1.2; margin: 8px 0 20px 0;">
+              THE JAIPUR CLOTHING COLLECTIVE
+            </h2>
+            <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.95rem; margin-bottom: 24px;">
+              Rooted in the royal court craft traditions of Rajasthan, VEXA merges centuries-old handloom weaves, single-origin Giza cottons, and royal Bandhgala tailoring with razor-sharp international minimal luxury. Every garment and footwear piece is sculpted with surgical attention to drape, proportion, and longevity.
+            </p>
+            <div style="display: flex; gap: 32px; margin-bottom: 34px;">
+              <div>
+                <strong style="color: var(--color-text-primary); font-size: 1.6rem; font-family: var(--font-serif);">100%</strong>
+                <div style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase;">Single-Origin Fabrics</div>
+              </div>
+              <div style="border-left: 1px solid var(--color-border); padding-left: 32px;">
+                <strong style="color: var(--color-text-primary); font-size: 1.6rem; font-family: var(--font-serif);">Jaipur</strong>
+                <div style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase;">Direct Atelier Craft</div>
+              </div>
+            </div>
+            <a href="#about" class="btn btn-outline-gold">DISCOVER OUR ATELIER STORY</a>
+          </div>
+          <div style="position: relative; text-align: center;">
+            <div style="background: var(--color-white); padding: 36px; border: 1px solid var(--color-border); border-radius: 4px; box-shadow: var(--shadow-card);">
+              <img src="assets/brand/vexa-logo-light.svg" alt="VEXA Monogram & Wordmark" style="max-width: 320px; width: 100%; height: auto;" />
+              <div style="margin-top: 24px; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold-dark); font-weight: 600;">
+                AUTHENTIC MONOGRAM & WORDMARK • JAIPUR
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Sellers Shelf -->
+      <section class="section-container" style="background: var(--color-white);">
+        <div class="section-header">
+          <span class="section-subtitle">Patron Favorites</span>
+          <h2 class="section-title">ATELIER BEST SELLERS</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="products-grid" id="bestSellersGrid">
+          <!-- Rendered by app.js -->
+        </div>
+      </section>
+
+      <!-- Connoisseur Reviews Section -->
+      <section class="section-container" style="background: var(--color-ivory); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+        <div class="section-header">
+          <span class="section-subtitle">Verified Patron Testimonials</span>
+          <h2 class="section-title">WORDS OF CONNOISSEURS</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" id="customerReviewsGrid">
+          <!-- Rendered by app.js -->
+        </div>
+      </section>
+
+      <!-- Instagram Visual Diary -->
+      <section class="section-container" style="background: var(--color-white);">
+        <div class="section-header">
+          <span class="section-subtitle">Visual Diary</span>
+          <h2 class="section-title">AS WORN BY CONNOISSEURS</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.86rem; margin-top: 8px;">Tag @vexa.official #VEXAJaipur on Instagram to be featured.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;" id="instagramGalleryFeed">
+          <!-- Rendered by app.js -->
+        </div>
+      </section>
+
+      <!-- VIP Concierge Newsletter -->
+      <section style="background: var(--color-pearl); border-top: 1px solid var(--color-border); padding: 80px 24px; text-align: center;">
+        <div style="max-width: 640px; margin: 0 auto;">
+          <span class="section-subtitle">Private Concierge</span>
+          <h2 style="font-size: 2.2rem; margin: 8px 0 14px 0;">JOIN THE VEXA COLLECTIVE</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.92rem; margin-bottom: 28px;">
+            Receive private drops, invitation-only showroom previews, and tailored styling advisories directly from our atelier.
+          </p>
+          <form onsubmit="event.preventDefault(); VEXA.showToast('Welcome to the VEXA Collective! Coupon JAIPURGOLD unlocked.'); this.reset();" style="display: flex; gap: 10px; max-width: 480px; margin: 0 auto;">
+            <input type="email" placeholder="Enter your email address" required 
+                   style="flex: 1; background: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 14px 18px; font-size: 0.84rem; border-radius: 2px;" />
+            <button type="submit" class="btn btn-gold">SUBSCRIBE</button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: ADVANCED SHOP / CATALOG (MEN, WOMEN, FOOTWEAR, SNEAKERS, NEW ARRIVALS, BEST SELLERS, SALE) -->
+    <div id="viewShop" class="view-container" style="display: none;">
+      <div class="section-container" style="padding-top: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; border-bottom: 1px solid var(--color-border); padding-bottom: 20px;">
+          <div>
+            <div style="font-size: 0.74rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;">
+              <a href="#home" style="color: var(--color-text-secondary); text-decoration: none;">Home</a> / <span style="color: var(--color-gold-dark);" id="catalogBreadcrumb">Catalog</span>
+            </div>
+            <h1 style="font-size: 2.4rem;" id="catalogMainTitle">THE CLOTHING & FOOTWEAR CATALOGUE</h1>
+          </div>
+          <div id="catalogResultCount" style="font-size: 0.84rem; color: var(--color-text-secondary);">
+            Showing all luxury pieces
+          </div>
+        </div>
+
+        <!-- Gender / Department Tabs -->
+        <div style="display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 1px solid var(--color-border); padding-bottom: 12px; flex-wrap: wrap;">
+          <button class="gender-tab-btn active" data-gender="all" onclick="VEXA.setGenderFilter('all')" 
+                  style="background: none; border: none; color: var(--color-text-primary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            ALL COLLECTIONS
+          </button>
+          <button class="gender-tab-btn" data-gender="men" onclick="VEXA.setGenderFilter('men')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            MEN
+          </button>
+          <button class="gender-tab-btn" data-gender="women" onclick="VEXA.setGenderFilter('women')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            WOMEN
+          </button>
+          <button class="gender-tab-btn" data-gender="footwear" onclick="VEXA.setGenderFilter('footwear')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            FOOTWEAR
+          </button>
+          <button class="gender-tab-btn" data-gender="sneakers" onclick="VEXA.setGenderFilter('sneakers')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            SNEAKERS
+          </button>
+          <button class="gender-tab-btn" data-gender="new-arrivals" onclick="VEXA.setGenderFilter('new-arrivals')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            NEW ARRIVALS
+          </button>
+          <button class="gender-tab-btn" data-gender="best-sellers" onclick="VEXA.setGenderFilter('best-sellers')" 
+                  style="background: none; border: none; color: var(--color-text-secondary); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            BEST SELLERS
+          </button>
+          <button class="gender-tab-btn" data-gender="sale" onclick="VEXA.setGenderFilter('sale')" 
+                  style="background: none; border: none; color: #A83232; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; cursor: pointer;">
+            SALE
+          </button>
+        </div>
+
+        <!-- Filter Controls & Sorter -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="categoryFilterPills"></div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <label style="font-size: 0.74rem; color: var(--color-text-secondary); text-transform: uppercase;">Sort By:</label>
+            <select id="catalogSortSelect" onchange="VEXA.filterAndRenderProducts()" 
+                    style="background: var(--color-white); color: var(--color-text-primary); border: 1px solid var(--color-border); padding: 8px 14px; font-size: 0.8rem; border-radius: 2px;">
+              <option value="recommended">Recommended</option>
+              <option value="newest">Newest First</option>
+              <option value="bestseller">Best Selling</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="discount">Biggest Discount</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="products-grid" id="catalogProductsGrid"></div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: PRODUCT DETAIL PAGE (PDP) -->
+    <div id="viewProduct" class="view-container" style="display: none;">
+      <div class="section-container" id="pdpContainer" style="padding-top: 30px;"></div>
+    </div>
+
+    <!-- VIEW 4: SEARCH RESULTS -->
+    <div id="viewSearch" class="view-container" style="display: none;">
+      <div class="section-container" style="padding-top: 40px;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 10px;" id="searchResultsHeading">SEARCH RESULTS</h1>
+        <p style="color: var(--color-text-secondary); margin-bottom: 30px;" id="searchResultsSub">Explore our atelier luxury collection</p>
+        <div class="products-grid" id="searchResultsGrid"></div>
+      </div>
+    </div>
+
+    <!-- VIEW 5: FULL CART PAGE -->
+    <div id="viewCart" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 900px; padding-top: 60px; text-align: center;">
+        <h1 style="font-size: 2.4rem; margin-bottom: 24px;">YOUR SHOPPING BAG</h1>
+        <div style="display: flex; justify-content: center; gap: 16px;">
+          <button class="btn btn-gold" onclick="VEXA.openCartDrawer()">OPEN BAG DRAWER</button>
+          <a href="#shop" class="btn btn-outline-gold">EXPLORE CATALOGUE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 6: MULTI-STEP CHECKOUT -->
+    <div id="viewCheckout" class="view-container" style="display: none;">
+      <div class="section-container" id="checkoutContainer" style="max-width: 1100px; padding-top: 30px;"></div>
+    </div>
+
+    <!-- VIEW 7: ORDER CONFIRMATION & LIVE TRACKING -->
+    <div id="viewOrder" class="view-container" style="display: none;">
+      <div class="section-container" id="orderConfirmationContainer" style="padding-top: 30px;"></div>
+    </div>
+
+    <!-- VIEW 8: CUSTOMER LOGIN & REGISTRATION -->
+    <div id="viewAuth" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 500px; padding-top: 60px;">
+        <div style="background: var(--color-white); border: 1px solid var(--color-border); padding: 40px; border-radius: 4px; box-shadow: var(--shadow-card);">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <img src="assets/brand/vexa-logo-light.svg" alt="VEXA" style="height: 48px; margin-bottom: 12px;" />
+            <span class="section-subtitle">Private Member Access</span>
+            <h2 style="font-size: 1.8rem; margin-top: 4px;" id="authPageTitle">PATRON SIGN IN</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.84rem; margin-top: 8px;">
+              Enter your mobile number to receive a verified SMS OTP directly on your phone.
+            </p>
+          </div>
+
+          <!-- Phone Number Step -->
+          <div id="pageAuthStepPhone">
+            <form onsubmit="event.preventDefault(); VEXA.sendRealSmsOtp();" style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <label style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); display: block; margin-bottom: 6px;">Your Name</label>
+                <input type="text" id="authCustomerName" placeholder="Full name (e.g. Aryan Mehra)" class="pincode-input" />
+              </div>
+              <div>
+                <label style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); display: block; margin-bottom: 6px;">Mobile Number *</label>
+                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: 2px;">
+                  <span style="padding: 10px 14px; background: var(--color-pearl); border-right: 1px solid var(--color-border); font-size: 0.85rem; font-weight: 600; color: var(--color-text-primary);">+91</span>
+                  <input type="tel" id="authCustomerPhone" placeholder="10-digit mobile number" maxlength="10" required 
+                         style="flex: 1; border: none; padding: 10px 14px; font-size: 0.88rem; outline: none; background: transparent; font-family: var(--font-sans);" />
+                </div>
+              </div>
+
+              <!-- Firebase / Provider reCAPTCHA container -->
+              <div id="recaptchaVerifierContainer" style="margin: 8px 0;"></div>
+
+              <button type="submit" class="btn btn-gold" id="btnSendPhoneOtp" style="width: 100%; margin-top: 6px;">
+                SEND VERIFICATION OTP
+              </button>
+            </form>
+          </div>
+
+          <!-- OTP Verification Step -->
+          <div id="pageAuthStepOtp" style="display: none; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">📱</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Enter Verification Code</h3>
+            <p style="color: var(--color-text-secondary); font-size: 0.82rem; margin-bottom: 20px;" id="authOtpSubtitle">
+              A 6-digit verification code has been dispatched via SMS.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <input type="text" id="authOtpInput" placeholder="• • • • • •" maxlength="6" 
+                     style="width: 100%; text-align: center; font-size: 1.8rem; letter-spacing: 8px; font-weight: 700; background: var(--color-pearl); border: 1px solid var(--color-text-primary); padding: 10px; border-radius: 4px; outline: none;" />
+
+              <button class="btn btn-gold" style="width: 100%;" onclick="VEXA.verifyRealSmsOtp()">
+                VERIFY OTP & SIGN IN
+              </button>
+
+              <div style="display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--color-text-secondary);">
+                <button type="button" style="background: none; border: none; text-decoration: underline; cursor: pointer; color: var(--color-text-secondary);" onclick="VEXA.backToAuthStepPhone()">
+                  Change Number
+                </button>
+                <button type="button" id="btnResendOtpTimer" style="background: none; border: none; color: var(--color-gold-dark); cursor: pointer;" onclick="VEXA.resendRealSmsOtp()">
+                  Resend OTP (60s)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 9: CUSTOMER ACCOUNT -->
+    <div id="viewAccount" class="view-container" style="display: none;">
+      <div class="section-container" id="accountContainer" style="padding-top: 40px;"></div>
+    </div>
+
+    <!-- VIEW 10: CUSTOMER ORDERS -->
+    <div id="viewOrders" class="view-container" style="display: none;">
+      <div class="section-container" id="ordersContainer" style="padding-top: 40px;"></div>
+    </div>
+
+    <!-- VIEW 11: WISHLIST -->
+    <div id="viewWishlist" class="view-container" style="display: none;">
+      <div class="section-container" id="wishlistContainer" style="padding-top: 40px;"></div>
+    </div>
+
+    <!-- VIEW 12: PRIVATE OWNER ADMIN DASHBOARD (/admin) -->
+    <div id="viewAdmin" class="view-container" style="display: none;">
+      <div id="adminDashboardContainer"></div>
+    </div>
+
+    <!-- VIEW 13: ABOUT VEXA -->
+    <div id="viewAbout" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 920px; padding-top: 60px;">
+        <span class="section-subtitle">Artisanal Manifesto</span>
+        <h1 style="font-size: 2.8rem; margin: 8px 0 24px 0;">THE ARCHITECTURE OF VEXA</h1>
+        <div style="border-left: 2px solid var(--color-gold-champagne); padding-left: 24px; margin-bottom: 30px; font-style: italic; color: var(--color-text-secondary); font-size: 1.1rem;">
+          "Born in the Pink City. Sculpted with the reverence of royal court tailoring. Distilled into pure international minimal luxury."
+        </div>
+        <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+          VEXA is a modern Indian luxury house dedicated to elevating traditional Rajasthani textiles, royal Bandhgala tailoring, and handcrafted footwear into a contemporary architectural wardrobe. We reject fast-fashion shortcuts, plastic blends, and disposable trends in favor of natural Giza cottons, Belgian flax linen, mulberry silks, and hand-lasted calfskin.
+        </p>
+        <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+          For concierge inquiries, bespoke commissions, or wholesale relations, reach our team directly at <strong>sethharsh0010@gmail.com</strong>.
+        </p>
+        <div style="margin-top: 40px;">
+          <a href="#shop" class="btn btn-gold">EXPLORE THE ATELIER PIECES</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 14: CONTACT US -->
+    <div id="viewContact" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 920px; padding-top: 60px;">
+        <span class="section-subtitle">Direct Concierge</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 24px 0;">CONNECT WITH VEXA ATELIER</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+          <div>
+            <h4 style="font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Jaipur Flagship Atelier</h4>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.7; margin-bottom: 20px;">
+              Atelier VEXA, C-Scheme,<br />
+              Ashok Nagar, Jaipur, Rajasthan 302001<br />
+              India
+            </p>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.7;">
+              <strong>Official Email:</strong> <a href="mailto:sethharsh0010@gmail.com" style="color: var(--color-text-primary);">sethharsh0010@gmail.com</a><br />
+              <strong>VIP Concierge WhatsApp:</strong> <span class="whatsapp-phone-display">+91 98290 12345</span>
+            </p>
+          </div>
+          <div>
+            <form onsubmit="event.preventDefault(); VEXA.showToast('Thank you! Your message has been routed to our atelier team.'); this.reset();" style="display: flex; flex-direction: column; gap: 14px;">
+              <input type="text" placeholder="Your Full Name" required class="pincode-input" />
+              <input type="tel" placeholder="Mobile Number (+91)" required class="pincode-input" />
+              <textarea placeholder="How may our atelier assist you?" rows="4" required class="pincode-input" style="font-family: var(--font-sans);"></textarea>
+              <button type="submit" class="btn btn-dark">SEND MESSAGE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 15: PRIVACY POLICY -->
+    <div id="viewPrivacyPolicy" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 840px; padding-top: 60px;">
+        <span class="section-subtitle">Legal & Compliance</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 20px 0;">PRIVACY POLICY</h1>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem; margin-bottom: 18px;">
+          VEXA ("we", "us", or "our") complies fully with the Indian Digital Personal Data Protection (DPDP) Act. We collect only information required to fulfill orders, verify identities via real SMS OTP, and deliver an elevated luxury e-commerce experience.
+        </p>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem;">
+          Your telephone number and address are used exclusively for verification and shipment dispatch. We never sell or license customer records to third parties. For privacy requests, contact: <strong>sethharsh0010@gmail.com</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW 16: RETURN & REFUND POLICY -->
+    <div id="viewReturnPolicy" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 840px; padding-top: 60px;">
+        <span class="section-subtitle">Assurance</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 20px 0;">RETURN & REFUND POLICY</h1>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem; margin-bottom: 16px;">
+          We offer a complimentary <strong>7-Day Doorstep Return & Exchange Window</strong> for all unworn luxury apparel and footwear. Items must retain their original atelier tags, tamper seal, and bespoke presentation packaging.
+        </p>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem;">
+          Refunds are issued directly to the original payment source (UPI, Credit/Debit Card, Net Banking) within 48-72 hours of atelier quality verification.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW 17: SHIPPING POLICY -->
+    <div id="viewShippingPolicy" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 840px; padding-top: 60px;">
+        <span class="section-subtitle">Logistics</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 20px 0;">SHIPPING & DELIVERY POLICY</h1>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem; margin-bottom: 16px;">
+          All orders are dispatched in bespoke tamper-evident protective luxury cartons directly from our central Jaipur atelier via premium air logistics partners (BlueDart Express, Delhivery Air).
+        </p>
+        <ul style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.8; margin-left: 20px;">
+          <li>NCR & Rajasthan: 24 to 48 Hours</li>
+          <li>Metro Cities (Mumbai, Bengaluru, Hyderabad, Kolkata, Chennai): 2 to 3 Business Days</li>
+          <li>Rest of India: 3 to 5 Business Days</li>
+          <li>Complimentary express shipping on all orders exceeding ₹1,999.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VIEW 18: TERMS & CONDITIONS -->
+    <div id="viewTerms" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 840px; padding-top: 60px;">
+        <span class="section-subtitle">Terms of Service</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 20px 0;">TERMS & CONDITIONS</h1>
+        <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 0.9rem;">
+          By accessing and purchasing from VEXA, you agree to our terms of service. All intellectual property, designs, photography, and brand marks are the exclusive property of VEXA Jaipur.
+        </p>
+      </div>
+    </div>
+
+    <!-- VIEW 19: FAQ -->
+    <div id="viewFaqs" class="view-container" style="display: none;">
+      <div class="section-container" style="max-width: 840px; padding-top: 60px;">
+        <span class="section-subtitle">Assistance</span>
+        <h1 style="font-size: 2.4rem; margin: 8px 0 24px 0;">FREQUENTLY ASKED QUESTIONS</h1>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <details style="background: var(--color-pearl); border: 1px solid var(--color-border); padding: 18px; border-radius: 4px; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--color-text-primary); font-size: 0.95rem;">How fast is shipping across India?</summary>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.6; margin-top: 10px;">
+              Dispatched via BlueDart Express directly from our Jaipur atelier. Arrives within 24-48 hours in NCR and 2-3 business days across Indian metros. Complimentary delivery on orders above ₹1,999.
+            </p>
+          </details>
+          <details style="background: var(--color-pearl); border: 1px solid var(--color-border); padding: 18px; border-radius: 4px; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--color-text-primary); font-size: 0.95rem;">How does real SMS OTP registration work?</summary>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.6; margin-top: 10px;">
+              Click the account icon, enter your 10-digit Indian mobile number, and receive a secure 6-digit cryptographic OTP via SMS. Verify the code to unlock your personalized atelier account.
+            </p>
+          </details>
+          <details style="background: var(--color-pearl); border: 1px solid var(--color-border); padding: 18px; border-radius: 4px; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--color-text-primary); font-size: 0.95rem;">How do I select sizes and ensure accurate fit?</summary>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.6; margin-top: 10px;">
+              Each product detail page contains an interactive size selector with chest, waist, and length measurements in inches. Stock is maintained per variation combination.
+            </p>
+          </details>
+          <details style="background: var(--color-pearl); border: 1px solid var(--color-border); padding: 18px; border-radius: 4px; cursor: pointer;">
+            <summary style="font-weight: 600; color: var(--color-text-primary); font-size: 0.95rem;">What payment methods are supported?</summary>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.6; margin-top: 10px;">
+              We support instant UPI (Google Pay, PhonePe, Paytm), all Indian and international Credit & Debit Cards (Visa, Mastercard, RuPay), Net Banking, and Cash on Delivery.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== DRAWERS & MODALS ==================== -->
+
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div class="modal-overlay" id="cartDrawerOverlay" onclick="VEXA.closeCartDrawer()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-text-primary); font-weight: 600;">Shopping Bag</span>
+        <span class="action-badge cart-badge-count" style="position: static;">0</span>
+      </div>
+      <button class="modal-close-btn" style="position: static;" onclick="VEXA.closeCartDrawer()">✕</button>
+    </div>
+    <div class="cart-shipping-bar" id="cartShippingProgressBar"></div>
+    <div class="cart-drawer-items" id="cartDrawerItems"></div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter"></div>
+  </aside>
+
+  <!-- Size Guide Modal -->
+  <div class="modal-overlay" id="sizeGuideModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="VEXA.closeSizeGuideModal()">✕</button>
+      <span class="section-subtitle">Measurement Standards</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 16px;">VEXA ATELIER SIZE GUIDE</h3>
+      <table class="vexa-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Chest (in)</th>
+            <th>Waist (in)</th>
+            <th>Length (in)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>S</strong></td><td>38 - 40</td><td>30 - 32</td><td>28.0</td></tr>
+          <tr><td><strong>M</strong></td><td>40 - 42</td><td>32 - 34</td><td>29.0</td></tr>
+          <tr><td><strong>L</strong></td><td>42 - 44</td><td>34 - 36</td><td>30.0</td></tr>
+          <tr><td><strong>XL</strong></td><td>44 - 46</td><td>36 - 38</td><td>30.5</td></tr>
+          <tr><td><strong>XXL</strong></td><td>46 - 48</td><td>38 - 40</td><td>31.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Isolated Admin 2FA TOTP Modal -->
+  <div class="modal-overlay" id="admin2faModal">
+    <div class="modal-box" style="max-width: 480px; text-align: center;">
+      <button class="modal-close-btn" onclick="VEXA.closeAdmin2faModal()">✕</button>
+      <div style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-gold-dark); font-weight: 700; margin-bottom: 6px;">Two-Factor Authentication</div>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 8px;">Atelier Security Gate</h3>
+      <p style="color: var(--color-text-secondary); font-size: 0.84rem; margin-bottom: 20px;">
+        Owner access is strictly gated via RFC 6238 TOTP. Enter the 6-digit code from your Authenticator app.
+      </p>
+
+      <div style="background: var(--color-pearl); border: 1px dashed var(--color-border); padding: 14px; border-radius: 4px; margin-bottom: 20px; text-align: left; font-size: 0.78rem;">
+        <div style="color: var(--color-text-primary); font-weight: 600; margin-bottom: 4px;">Authenticator Setup Key:</div>
+        <code style="display: block; background: var(--color-white); padding: 6px 10px; border: 1px solid var(--color-border); font-family: monospace; font-size: 0.82rem; word-break: break-all; color: var(--color-text-primary);">VEXA-JPR-2026-HARSH-SECURE-KEY</code>
+        <div style="color: var(--color-text-muted); font-size: 0.7rem; margin-top: 6px;">Compatible with Google Authenticator, Microsoft Authenticator & 1Password.</div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-secondary); margin-bottom: 6px;">6-Digit Security Code or Recovery Key</label>
+        <input type="text" id="adminTotpCodeInput" maxlength="20" placeholder="e.g. 849201 or VX-REC-..." class="pincode-input" style="width: 100%; text-align: center; font-size: 1.2rem; letter-spacing: 0.2em; font-weight: 700;" />
+      </div>
+
+      <button class="btn btn-gold" style="width: 100%; margin-bottom: 14px;" onclick="VEXA.submitAdmin2FA()">
+        AUTHORIZE ATELIER SESSION
+      </button>
+
+      <div style="border-top: 1px solid var(--color-border); padding-top: 14px; text-align: left;">
+        <details style="font-size: 0.74rem; color: var(--color-text-secondary);">
+          <summary style="cursor: pointer; color: var(--color-text-primary); font-weight: 600;">View Emergency Recovery Codes (6 Backup Keys)</summary>
+          <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family: monospace; background: var(--color-ivory); padding: 10px; border-radius: 4px;">
+            <span>VX-REC-7821-4902</span>
+            <span>VX-REC-9310-5812</span>
+            <span>VX-REC-3419-8820</span>
+            <span>VX-REC-6102-7741</span>
+            <span>VX-REC-5099-2318</span>
+            <span>VX-REC-8842-1903</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div class="modal-overlay" id="addProductModal">
+    <div class="modal-box" style="max-width: 650px;">
+      <button class="modal-close-btn" onclick="VEXA.closeAddProductModal()">✕</button>
+      <span class="section-subtitle">Catalog Architecture</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 20px;">Add New Luxury Piece</h3>
+      <form onsubmit="event.preventDefault(); VEXA.submitNewProduct();" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Product Title</label>
+          <input type="text" id="newProdName" class="pincode-input" style="width: 100%; margin-top: 4px;" required placeholder="e.g. Royal Raw Silk Bandhgala" />
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Department</label>
+          <select id="newProdCategory" class="pincode-input" style="width: 100%; margin-top: 4px;">
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Footwear">Footwear</option>
+            <option value="Sneakers">Sneakers</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Subcategory</label>
+          <input type="text" id="newProdSubcategory" class="pincode-input" style="width: 100%; margin-top: 4px;" placeholder="e.g. Ethnic Wear / Loafers" />
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Selling Price (₹)</label>
+          <input type="number" id="newProdPrice" class="pincode-input" style="width: 100%; margin-top: 4px;" required placeholder="4999" />
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">MRP / Regular Price (₹)</label>
+          <input type="number" id="newProdOrigPrice" class="pincode-input" style="width: 100%; margin-top: 4px;" placeholder="7999" />
+        </div>
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Primary Image URL</label>
+          <input type="url" id="newProdImage" class="pincode-input" style="width: 100%; margin-top: 4px;" required placeholder="https://images.unsplash.com/photo-..." />
+        </div>
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Atelier Description</label>
+          <textarea id="newProdDesc" class="pincode-input" rows="3" style="width: 100%; margin-top: 4px;" placeholder="Artisanal description of silhouette, drape, and origin."></textarea>
+        </div>
+        <div style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn btn-outline-gold" onclick="VEXA.closeAddProductModal()">CANCEL</button>
+          <button type="submit" class="btn btn-gold">PUBLISH PIECE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div class="modal-overlay" id="editProductModal">
+    <div class="modal-box" style="max-width: 650px;">
+      <button class="modal-close-btn" onclick="VEXA.closeEditProductModal()">✕</button>
+      <span class="section-subtitle">Catalog Modification</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 20px;">Edit Product Specifications</h3>
+      <form onsubmit="event.preventDefault(); VEXA.submitEditProduct();" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <input type="hidden" id="editProdId" />
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Product Title</label>
+          <input type="text" id="editProdName" class="pincode-input" style="width: 100%; margin-top: 4px;" required />
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Selling Price (₹)</label>
+          <input type="number" id="editProdPrice" class="pincode-input" style="width: 100%; margin-top: 4px;" required />
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">MRP Price (₹)</label>
+          <input type="number" id="editProdOrigPrice" class="pincode-input" style="width: 100%; margin-top: 4px;" />
+        </div>
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Image URL</label>
+          <input type="url" id="editProdImage" class="pincode-input" style="width: 100%; margin-top: 4px;" required />
+        </div>
+        <div style="grid-column: span 2;">
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Description</label>
+          <textarea id="editProdDesc" class="pincode-input" rows="3" style="width: 100%; margin-top: 4px;"></textarea>
+        </div>
+        <div style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn btn-outline-gold" onclick="VEXA.closeEditProductModal()">CANCEL</button>
+          <button type="submit" class="btn btn-gold">SAVE CHANGES</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- New Coupon Modal -->
+  <div class="modal-overlay" id="newCouponModal">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close-btn" onclick="VEXA.closeNewCouponModal()">✕</button>
+      <span class="section-subtitle">Promotions</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 16px;">Create Promotion Coupon</h3>
+      <form onsubmit="event.preventDefault(); VEXA.submitNewCoupon();" style="display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Coupon Code</label>
+          <input type="text" id="newCouponCode" class="pincode-input" style="width: 100%; text-transform: uppercase; font-weight: 700; margin-top: 4px;" required placeholder="e.g. FESTIVE20" />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Discount Type</label>
+            <select id="newCouponType" class="pincode-input" style="width: 100%; margin-top: 4px;">
+              <option value="fixed">Flat Amount (₹)</option>
+              <option value="percentage">Percentage (%)</option>
+              <option value="shipping">Free Shipping</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Discount Value</label>
+            <input type="number" id="newCouponVal" class="pincode-input" style="width: 100%; margin-top: 4px;" required placeholder="500 or 15" />
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Minimum Order Value (₹)</label>
+          <input type="number" id="newCouponMinOrder" class="pincode-input" style="width: 100%; margin-top: 4px;" value="1999" />
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+          <button type="button" class="btn btn-outline-gold" onclick="VEXA.closeNewCouponModal()">CANCEL</button>
+          <button type="submit" class="btn btn-gold">CREATE COUPON</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- GST Tax Invoice Modal -->
+  <div class="modal-overlay" id="invoiceModal">
+    <div class="modal-box" style="max-width: 840px; padding: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;" class="no-print">
+        <h4 style="font-family: var(--font-serif); font-size: 1.25rem;">Official GST Tax Invoice</h4>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-gold" onclick="window.print()">PRINT INVOICE</button>
+          <button class="btn btn-outline-gold" onclick="VEXA.closeInvoiceModal()">CLOSE</button>
+        </div>
+      </div>
+      <div id="invoicePrintContainer"></div>
+    </div>
+  </div>
+
+  <!-- 7-Day Return / Exchange Request Modal -->
+  <div class="modal-overlay" id="returnOrderModal">
+    <div class="modal-box" style="max-width: 500px;">
+      <button class="modal-close-btn" onclick="VEXA.closeReturnModal()">✕</button>
+      <span class="section-subtitle">Patron Care</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 12px;">Request Return or Exchange</h3>
+      <p style="color: var(--color-text-secondary); font-size: 0.82rem; margin-bottom: 20px;">
+        Complimentary 7-day doorstep exchange and return service for verified patrons.
+      </p>
+      <form onsubmit="event.preventDefault(); VEXA.submitReturnRequest();" style="display: flex; flex-direction: column; gap: 14px;">
+        <input type="hidden" id="returnOrderId" />
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Request Type</label>
+          <select id="returnTypeSelect" class="pincode-input" style="width: 100%; margin-top: 4px;">
+            <option value="exchange">Exchange for Different Size / Color</option>
+            <option value="return">Return for Full Refund</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Reason for Request</label>
+          <select id="returnReasonSelect" class="pincode-input" style="width: 100%; margin-top: 4px;">
+            <option value="Size does not fit perfectly">Size does not fit perfectly</option>
+            <option value="Color or shade variation">Color or shade variation</option>
+            <option value="Fabric texture preference">Fabric texture preference</option>
+            <option value="Arrived defective or damaged">Arrived defective or damaged</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; text-transform: uppercase; color: var(--color-text-secondary);">Additional Notes / Desired Size</label>
+          <textarea id="returnNotes" class="pincode-input" rows="3" style="width: 100%; margin-top: 4px;" placeholder="e.g. Please exchange size M for size L in Matte Black"></textarea>
+        </div>
+        <div style="background: var(--color-pearl); padding: 12px; border-radius: 4px; font-size: 0.74rem; color: var(--color-text-secondary);">
+          Doorstep reverse pickup will be scheduled via BlueDart Express within 24–48 hours. Items must have original tags intact.
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+          <button type="button" class="btn btn-outline-gold" onclick="VEXA.closeReturnModal()">CANCEL</button>
+          <button type="submit" class="btn btn-gold">CONFIRM RETURN REQUEST</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Floating WhatsApp Concierge Button -->
+  <a id="floatingWhatsappBtn" href="javascript:void(0)" onclick="VEXA.openSupportWhatsapp(event)" 
+     target="_blank" rel="noopener noreferrer" 
+     class="whatsapp-floating-btn" 
+     title="Chat with VEXA Atelier Concierge">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.029-.488-1.503-.618-2.484-2.14-2.56-2.241-.073-.102-.607-.807-.607-1.54 0-.734.385-1.096.522-1.246.137-.15.299-.187.4-.187.1 0 .2.002.287.006.092.004.214-.035.334.254.125.299.426 1.042.463 1.118.037.075.062.163.013.262-.05.101-.075.163-.15.251-.075.088-.158.197-.225.265-.075.076-.153.159-.066.309.088.15.389.641.834 1.038.573.511 1.057.669 1.207.744.15.076.238.064.327-.038.088-.102.376-.439.476-.59.1-.15.2-.126.338-.076.138.05.877.413 1.028.489.15.075.25.113.288.176.038.063.038.365-.106.77z"/>
+    </svg>
+  </a>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" onclick="VEXA.navigateTo('#home')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </button>
+    <button class="mobile-nav-btn" onclick="VEXA.navigateTo('#shop')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <span>Shop</span>
+    </button>
+    <button class="mobile-nav-btn" onclick="VEXA.navigateTo('#wishlist')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      <span>Wishlist</span>
+    </button>
+    <button class="mobile-nav-btn" onclick="VEXA.handleUserIconClick()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Account</span>
+    </button>
+    <button class="mobile-nav-btn" onclick="VEXA.openCartDrawer()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <span>Bag</span>
+    </button>
+  </nav>
+
+  <!-- ==================== ULTRA-PREMIUM LUXURY FOOTER ==================== -->
+  <footer style="background: var(--color-ivory); border-top: 1px solid var(--color-border); padding: 80px 28px 36px 28px; margin-top: 80px;">
+    <div style="max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 50px;">
+      <div>
+        <a href="#home" style="display: inline-block; margin-bottom: 20px;">
+          <img src="assets/brand/vexa-logo-light.svg" alt="VEXA" style="height: 54px;" />
+        </a>
+        <p style="color: var(--color-text-secondary); font-size: 0.88rem; line-height: 1.8; max-width: 380px; margin-bottom: 18px;">
+          VEXA is an Indian ultra-premium fashion and footwear house founded in Jaipur. Single-origin heritage textiles distilled into minimal contemporary luxury.
+        </p>
+        <div style="font-size: 0.82rem; color: var(--color-text-primary);">
+          Atelier Desk: <a href="mailto:sethharsh0010@gmail.com" style="color: var(--color-gold-dark); text-decoration: none; font-weight: 600;">sethharsh0010@gmail.com</a>
+        </div>
+      </div>
+
+      <div>
+        <h5 style="color: var(--color-text-primary); font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700;">Departments</h5>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.84rem;">
+          <li><a href="#shop/men" style="color: var(--color-text-secondary); text-decoration: none;">Men's Collection</a></li>
+          <li><a href="#shop/women" style="color: var(--color-text-secondary); text-decoration: none;">Women's Couture</a></li>
+          <li><a href="#shop/footwear" style="color: var(--color-text-secondary); text-decoration: none;">Footwear & Loafers</a></li>
+          <li><a href="#shop/sneakers" style="color: var(--color-text-secondary); text-decoration: none;">Minimal Sneakers</a></li>
+          <li><a href="#shop/new-arrivals" style="color: var(--color-text-secondary); text-decoration: none;">New Season Arrivals</a></li>
+          <li><a href="#shop/sale" style="color: #A83232; text-decoration: none;">Sale Collection</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 style="color: var(--color-text-primary); font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700;">Atelier & Assistance</h5>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.84rem;">
+          <li><a href="#tracking" style="color: var(--color-text-secondary); text-decoration: none;">Order Tracking</a></li>
+          <li><a href="#contact" style="color: var(--color-text-secondary); text-decoration: none;">Concierge Contact</a></li>
+          <li><a href="#shipping-policy" style="color: var(--color-text-secondary); text-decoration: none;">Shipping Policy</a></li>
+          <li><a href="#return-policy" style="color: var(--color-text-secondary); text-decoration: none;">Returns & Exchanges</a></li>
+          <li><a href="#faqs" style="color: var(--color-text-secondary); text-decoration: none;">Frequently Asked Questions</a></li>
+          <li><a href="#admin" style="color: var(--color-gold-dark); text-decoration: none; font-weight: 600;">Private Owner Admin (/admin)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 style="color: var(--color-text-primary); font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; font-weight: 700;">Direct Inquiries</h5>
+        <p style="color: var(--color-text-secondary); font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px;">
+          For concierge assistance, wholesale, or bespoke private tailoring:
+        </p>
+        <div style="font-size: 0.84rem; color: var(--color-text-primary); font-weight: 600; margin-bottom: 18px;">
+          <a href="mailto:sethharsh0010@gmail.com" style="color: var(--color-text-primary); text-decoration: none;">sethharsh0010@gmail.com</a>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: var(--color-white); border: 1px solid var(--color-border); padding: 4px 10px; font-size: 0.7rem; border-radius: 2px; font-weight: 600;">UPI</span>
+          <span style="background: var(--color-white); border: 1px solid var(--color-border); padding: 4px 10px; font-size: 0.7rem; border-radius: 2px; font-weight: 600;">RuPay</span>
+          <span style="background: var(--color-white); border: 1px solid var(--color-border); padding: 4px 10px; font-size: 0.7rem; border-radius: 2px; font-weight: 600;">Visa</span>
+          <span style="background: var(--color-white); border: 1px solid var(--color-border); padding: 4px 10px; font-size: 0.7rem; border-radius: 2px; font-weight: 600;">Mastercard</span>
+          <span style="background: var(--color-white); border: 1px solid var(--color-border); padding: 4px 10px; font-size: 0.7rem; border-radius: 2px; font-weight: 600;">COD</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 1440px; margin: 0 auto; border-top: 1px solid var(--color-border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: var(--color-text-secondary); flex-wrap: wrap; gap: 12px;">
+      <div>
+        © 2026 VEXA CLOTHING & FOOTWEAR COLLECTIVE. ALL RIGHTS RESERVED. JAIPUR, RAJASTHAN, INDIA.
+      </div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#privacy-policy" style="color: var(--color-text-secondary); text-decoration: none;">Privacy Policy</a>
+        <a href="#terms" style="color: var(--color-text-secondary); text-decoration: none;">Terms & Conditions</a>
+        <a href="#shipping-policy" style="color: var(--color-text-secondary); text-decoration: none;">Shipping Policy</a>
+        <a href="#return-policy" style="color: var(--color-text-secondary); text-decoration: none;">Return Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="liquid-experience.js"></script>
+</body>
+</html>

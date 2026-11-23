@@ -1,0 +1,27 @@
+{
+  "name": "vexa-luxury-fashion-ecommerce",
+  "version": "1.0.0",
+  "description": "VEXA - Clothing Collective Jaipur Premium Fashion E-Commerce Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "vexa",
+    "ecommerce",
+    "fashion",
+    "luxury",
+    "clothing",
+    "jaipur",
+    "razorpay",
+    "express"
+  ],
+  "author": "VEXA Clothing Collective",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "razorpay": "^2.9.4"
+  }
+}
